@@ -20,4 +20,8 @@ class BookIntegrationController(private val bookIntegrationPort: BookIntegration
             bookIntegrationPort.findAllBooks()))
     }
 
+    @Delete("/{id}")
+    fun deleteBook(@PathVariable id: Long) {
+        bookIntegrationPort.deleteBook(id)
+    }
 }
