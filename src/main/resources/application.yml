@@ -1,3 +1,10 @@
 micronaut:
   application:
     name: integrationBookshop
+  server:
+    cors:
+      enabled: true
+    port: 8088
+endpoints:
+  health:
+    enabled: true
