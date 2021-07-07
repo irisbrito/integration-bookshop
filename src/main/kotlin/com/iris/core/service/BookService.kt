@@ -24,6 +24,6 @@ class BookService (private val bookCockroachApiPort: BookCockroachApiPort) : Boo
     }
 
     override fun deleteBook(id: Long) {
-        TODO("Not yet implemented")
+       bookCockroachApiPort.deleteBook(id)
     }
 }
