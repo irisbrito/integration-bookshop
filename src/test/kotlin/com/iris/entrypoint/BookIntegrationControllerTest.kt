@@ -55,6 +55,25 @@ class BookIntegrationControllerTest : AnnotationSpec() {
     }
 
     @Test
+    fun `should update book by id`(){
+
+        val bookDtoTest = BookDto(
+            bookDto.id, bookDto.name, bookDto.price, bookDto.description,
+            WriterDto(bookDto.writer.id, bookDto.writer.nome, bookDto.writer.nationality),
+        )
+
+        val bookDtoTestMaybe = Maybe.just(bookDtoTest)
+
+        every {
+            BookConverter.bookToBookDto(bookIntegrationPort.updateBook(any(), any()))
+        } returns bookDtoTestMaybe
+
+        val result = bookIntegration.updateBook(bookDto.id!!, bookDto)
+
+        result.status shouldBe HttpStatus.OK
+    }
+
+    @Test
     fun `should delete book by id`() {
         every { bookIntegrationPort.deleteBook(any()) } returns Unit
 
