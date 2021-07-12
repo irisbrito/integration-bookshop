@@ -43,6 +43,15 @@ class BookCockroachApiTest : AnnotationSpec() {
     }
 
     @Test
+    fun `should save a book`(){
+        every { cockroachApiLowLevelClient.saveBook(any()) } returns maybeBookDto
+
+        val result = bookCockroachApi.createBook(book)
+
+        result shouldBe maybeBookDto
+    }
+
+    @Test
     fun `should get all books`() {
         every { cockroachApiDeclarativeClient.getAllBooks() } returns maybeListOfBookDto
 
