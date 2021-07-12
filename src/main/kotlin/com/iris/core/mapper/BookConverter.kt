@@ -14,10 +14,22 @@ class BookConverter {
                 WriterConverter.writerDtoToWriter(
                     WriterDto(bookDto.id,bookDto.writer.nome,bookDto.writer.nationality)))
 
+        fun bookDtoToBook(bookDto: Maybe<BookDto>) = bookDto.map {
+            bookDtoMaybe -> Book(bookDtoMaybe.id,bookDtoMaybe.name,bookDtoMaybe.price,bookDtoMaybe.description,
+            WriterConverter.writerDtoToWriter(
+                WriterDto(bookDtoMaybe.id,bookDtoMaybe.writer.nome,bookDtoMaybe.writer.nationality)))
+        }
+
         fun bookToBookDto(book: Book) =
             BookDto(book.id,book.name,book.price,book.description,
                 WriterConverter.writerToWriterDto(
                     Writer(book.writer.id,book.writer.nome,book.writer.nationality)))
+
+        fun bookToBookDto(book: Maybe<Book>) =
+            book.map { bookMaybe ->
+                BookDto(bookMaybe.id,bookMaybe.name,bookMaybe.price,bookMaybe.description,
+                WriterConverter.writerToWriterDto(Writer(bookMaybe.id,bookMaybe.writer.nome,bookMaybe.writer.nationality)))
+            }
 
         fun listBookToListBookDto(book: Maybe<List<Book>>) = book.map {bookList ->
             bookList.stream().map { book -> BookDto(book.id,book.name,book.price,book.description,

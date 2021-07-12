@@ -12,7 +12,7 @@ import javax.inject.Singleton
 class BookService (private val bookCockroachApiPort: BookCockroachApiPort) : BookIntegrationPort {
 
     override fun createBook(book: BookDto): Maybe<Book> {
-        TODO("Not yet implemented")
+        return BookConverter.bookDtoToBook(bookCockroachApiPort.createBook(BookConverter.bookDtoToBook(book)))
     }
 
     override fun findAllBooks(): Maybe<List<Book>> {
@@ -20,7 +20,7 @@ class BookService (private val bookCockroachApiPort: BookCockroachApiPort) : Boo
     }
 
     override fun updateBook(id: Long, book: BookDto) : Maybe<Book> {
-        TODO("Not yet implemented")
+        return BookConverter.bookDtoToBook(bookCockroachApiPort.updateBook(id,BookConverter.bookDtoToBook(book)))
     }
 
     override fun deleteBook(id: Long) {
