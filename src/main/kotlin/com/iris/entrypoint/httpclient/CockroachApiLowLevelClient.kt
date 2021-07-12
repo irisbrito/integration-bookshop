@@ -22,4 +22,11 @@ class CockroachApiLowLevelClient
         val flowable = httpClient.retrieve(req, Argument.of(BookDto::class.java))
         return flowable.firstElement()
     }
+
+    fun updateBook(id: Long, bookDto: BookDto): Maybe<BookDto> {
+        val uri: URI = UriBuilder.of("/v1/iupp/book/$id").build()
+        val req: HttpRequest<*> = PUT<Any>(uri, bookDto).body(bookDto)
+        val flowable = httpClient.retrieve(req, Argument.of(BookDto::class.java))
+        return flowable.firstElement()
+    }
 }
