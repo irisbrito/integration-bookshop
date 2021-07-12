@@ -53,4 +53,14 @@ class BookIntegrationControllerTest : AnnotationSpec() {
 
         result.status() shouldBe HttpStatus.OK
     }
+
+    @Test
+    fun `should delete book by id`() {
+        every { bookIntegrationPort.deleteBook(any()) } returns Unit
+
+        val result = bookIntegration.deleteBook(bookDto.id!!)
+
+        result shouldBe Unit
+    }
+
 }
