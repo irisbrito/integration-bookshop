@@ -60,4 +60,12 @@ class BookCockroachApiTest : AnnotationSpec() {
         result shouldBe maybeListOfBookDto
     }
 
+    @Test
+    fun `should update a book by id`(){
+        every {cockroachApiLowLevelClient.updateBook(any(), any())} returns maybeBookDto
+
+        val result = bookCockroachApi.updateBook(book.id!!, book)
+
+        result shouldBe maybeBookDto
+    }
 }
