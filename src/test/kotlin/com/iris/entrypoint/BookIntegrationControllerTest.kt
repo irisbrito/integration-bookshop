@@ -44,4 +44,13 @@ class BookIntegrationControllerTest : AnnotationSpec() {
 
         result.status shouldBe HttpStatus.CREATED
     }
+
+    @Test
+    fun `should get all books`() {
+        every { BookConverter.listBookToListBookDto(bookIntegrationPort.findAllBooks()) } returns maybeListOfBookDto
+
+        val result = bookIntegration.getAllBooks()
+
+        result.status() shouldBe HttpStatus.OK
+    }
 }
